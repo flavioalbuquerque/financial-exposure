@@ -1,0 +1,35 @@
+@using OrderGenerator.Services
+@using OrderGenerator.Services.Interfaces
+
+@inject IResponseMessageService ResponseService;
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="response-message">
+        <strong>@Message</strong>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Message { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        ResponseService.OnMessageUpdated += UpdateMessage;
+    }
+
+    public void UpdateMessage(string message)
+    {
+        if (Message == message) 
+            return;
+        
+        Message = message;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        ResponseService.OnMessageUpdated -= UpdateMessage;
+    }
+}

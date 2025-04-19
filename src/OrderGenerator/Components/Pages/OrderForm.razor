@@ -1,0 +1,74 @@
+@page "/order-form"
+@rendermode InteractiveServer
+
+@using OrderGenerator.Models;
+@using OrderGenerator.Services.Interfaces
+
+@inject IOrderService OrderService;
+
+<PageTitle>Enviar Ordem</PageTitle>
+
+<div class="order-form-container">
+    <h2 class="form-title">Enviar Ordem</h2>
+
+    <EditForm Model="@orderModel" OnValidSubmit="SubmitOrder" FormName="OrderForm">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="symbol">Símbolo:</label>
+            <InputSelect id="symbol" @bind-Value="orderModel.Symbol" class="form-control">
+                <option value="">-- Selecione --</option>
+                @foreach (var symbol in OrderService.GetSymbols())
+                {
+                    <option value="@symbol">@symbol</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => orderModel.Symbol)" />
+        </div>
+
+        <div class="form-group">
+            <label for="side">Lado:</label>
+            <InputSelect id="side" @bind-Value="orderModel.Side" class="form-control">
+                <option value="">-- Selecione --</option>
+                @foreach (var lado in OrderService.GetSides())
+                {
+                    <option value="@lado.Value">@lado.Text</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => orderModel.Side)" />
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantidade:</label>
+            <InputNumber id="quantity" @bind-Value="orderModel.Quantity" class="form-control" />
+            <ValidationMessage For="@(() => orderModel.Quantity)" />
+        </div>
+
+        <div class="form-group">
+            <label for="price">Preço:</label>
+            <InputNumber id="price" @bind-Value="orderModel.Price" class="form-control" Step="@OrderService.GetPriceStep()" />
+            <ValidationMessage For="@(() => orderModel.Price)" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </EditForm>
+
+    <ResponseMessage @ref="responseMessageComponent" />
+
+</div>
+
+@code {
+    private OrderModel orderModel = new();
+    private string? _responseMessage;
+    private ResponseMessage responseMessageComponent;
+    
+    private async Task SubmitOrder()
+    {
+        _responseMessage = await OrderService.SendOrder(orderModel);
+        responseMessageComponent.UpdateMessage(_responseMessage);
+    }
+
+}
