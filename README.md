@@ -2,9 +2,9 @@
 
 Este repositório contém 3 projetos:
 
-- OrderGenerator: Serviço implementado em Blazor que contém a tela para envio de ordens
-- OrderAccumulator: Long running service utilizado para calcular a exposição financeira das ordens enviadas
-- OrderAppHost: Serviço em .Net Aspire que contém ferramentas para gerir os demais serviços
+- `OrderGenerator`: Serviço implementado em Blazor que contém a tela para envio de ordens
+- `OrderAccumulator`: Long running service utilizado para calcular a exposição financeira das ordens enviadas
+- `OrderAppHost`: Serviço em .Net Aspire que contém ferramentas para gerir os demais serviços
 
 ```mermaid
 sequenceDiagram
