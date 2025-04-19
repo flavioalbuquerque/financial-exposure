@@ -42,6 +42,7 @@ ScaffoldingReadMe.txt
 CodeCoverage/
 .idea/
 store/
+*.sln.DotSettings.*
 
 # MSBuild Binary and Structured Log
 *.binlog
