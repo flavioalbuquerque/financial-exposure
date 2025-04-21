@@ -6,6 +6,12 @@ Este repositório contém 3 projetos:
 - `OrderAccumulator`: Long running service utilizado para calcular a exposição financeira das ordens enviadas
 - `OrderAppHost`: Serviço em .Net Aspire que contém ferramentas para gerir os demais serviços
 
+## Instruções para uso
+Executar o `OrderAppHost`: `dotnet run --project src/OrderAppHost`
+
+
+## Diagramas
+
 ```mermaid
 sequenceDiagram
     title Envio de Ordem
@@ -28,7 +34,4 @@ sequenceDiagram
         Accumulator->>Generator: FIX: ExecType = New
         Generator->>Cliente: Ordem aceita
     end
-
-    
-
 ```
