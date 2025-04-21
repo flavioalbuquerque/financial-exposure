@@ -7,9 +7,8 @@ using QuickFix;
 
 namespace OrderAccumulator;
 
-public static class Program
+public class Program
 {
-    [STAThread]
     public static void Main(string[] args)
     {
         var builder = Host.CreateApplicationBuilder(args);
@@ -39,14 +38,10 @@ public static class Program
 
         builder.Services.AddSingleton<IApplication, FixApplication>();
         builder.Services.AddSingleton<FixSessionManager>();
+        
+        builder.Services.AddHostedService<FixBackgroundService>();
     
         var host = builder.Build();
-        
-        var sessionManager = host.Services.GetRequiredService<FixSessionManager>();
-        sessionManager.StartSession();
-        
-        Console.Read();
-        
-        sessionManager.StopSession();
+        host.Run();
     }
 }

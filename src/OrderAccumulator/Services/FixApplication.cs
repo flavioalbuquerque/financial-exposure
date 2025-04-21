@@ -39,11 +39,30 @@ namespace OrderAccumulator.Services
             _logger.LogDebug($"ToApp (Out): {message}");
         }
 
-        public void FromAdmin(Message message, SessionID sessionId) { }
-        public void OnCreate(SessionID sessionId) { }
-        public void OnLogout(SessionID sessionId) { }
-        public void OnLogon(SessionID sessionId) { }
-        public void ToAdmin(Message message, SessionID sessionId) { }
+        public void FromAdmin(Message message, SessionID sessionId)
+        {
+            _logger.LogDebug($"FromAdmin: {message}");
+        }
+
+        public void ToAdmin(Message message, SessionID sessionId)
+        {
+            _logger.LogDebug($"ToAdmin: {message}");
+        }
+
+        public void OnCreate(SessionID sessionId)
+        {
+            _logger.LogDebug($"OnCreate: {sessionId}");
+        }
+
+        public void OnLogout(SessionID sessionId)
+        {
+            _logger.LogDebug($"OnLogout: {sessionId}");
+        }
+
+        public void OnLogon(SessionID sessionId)
+        {
+            _logger.LogDebug($"OnLogon: {sessionId}");
+        }
         
         #endregion
 

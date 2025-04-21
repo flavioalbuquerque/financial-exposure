@@ -23,20 +23,14 @@ public class FixApplication : MessageCracker, IApplication, IFixSender
     
     public void OnCreate(SessionID sessionId)
     {
-        _logger.LogDebug($"[OnCreate] {sessionId}");
-        var session = Session.LookupSession(sessionId);
-        if (session is null)
-        {
-            _sessionId = null;
-            throw new ApplicationException($"Session not found for SessionId: {sessionId}");
-        }
-        
+        _logger.LogDebug($"OnCreate: {sessionId}");
         _sessionId = sessionId;
     }
 
     public void OnLogon(SessionID sessionId)
     {
         _logger.LogDebug($"Logon: {sessionId}");
+        _sessionId = sessionId;
     }
 
     public void OnLogout(SessionID sessionId)
