@@ -52,7 +52,7 @@ http://localhost:15219
 ## Testando a interface para envio de ordens
 A interface `OrderGenerator` estará disponível no seguinte endereço:
 ```
-https://localhost:7183
+http://localhost:5079
 ```
 
 
