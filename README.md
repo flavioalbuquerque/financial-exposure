@@ -112,6 +112,10 @@ Funcionalidades planejadas para as próximas versões da solução:
 - [ ] **Correção na validação de ordens no frontend**  
   Corrigir validação para quantidade e preço acima de 999,00.
 
+- [ ] **Implementar suporte completo a HTTPS**  
+  Configurar os serviços para utilizar HTTPS por padrão, garantindo comunicação segura entre os componentes da solução.
+  Inclui ajustes nas configurações de `applicationUrl` e a remoção da dependência da variável `ASPIRE_ALLOW_UNSECURED_TRANSPORT` para ambientes locais.
+
 - [ ] **Dashboard de exposição agregada**  
   Interface visual para acompanhar a exposição financeira total em tempo real.
 
