@@ -10,7 +10,7 @@ public interface IExposureService
     
     decimal GetDefaultMaxExposure();
     
-    void SetDefaultMaxExposure(decimal defaultMaxExposure);
+    bool SetDefaultMaxExposure(decimal defaultMaxExposure);
 
     Dictionary<string, decimal> GetAllExposures();
 
@@ -18,5 +18,7 @@ public interface IExposureService
 
     IReadOnlyDictionary<string, List<Order>> GetAllOrders();
 
-    void ResetAllOrders();
+    bool DeleteOrders(string symbol);
+    
+    bool DeleteAllOrders();
 }

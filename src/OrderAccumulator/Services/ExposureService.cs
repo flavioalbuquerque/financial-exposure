@@ -76,12 +76,13 @@ public class ExposureService : IExposureService
         return _exposureSettings.DefaultMaxExposure;
     }
 
-    public void SetDefaultMaxExposure(decimal defaultMaxExposure)
+    public bool SetDefaultMaxExposure(decimal defaultMaxExposure)
     {
         if(defaultMaxExposure <= 0)
             throw new BusinessValidationException("Default max exposure must be greater than zero.", nameof(defaultMaxExposure));
         
         _exposureSettings.DefaultMaxExposure = defaultMaxExposure;
+        return true;
     }
     
     public Dictionary<string, decimal> GetAllExposures()
@@ -107,8 +108,15 @@ public class ExposureService : IExposureService
         );
     }
 
-    public void ResetAllOrders()
+    public bool DeleteOrders(string symbol)
+    {
+        _ordersBySymbol.Remove(symbol);
+        return true;
+    }
+    
+    public bool DeleteAllOrders()
     {
         _ordersBySymbol.Clear();
+        return true;
     }
 }
