@@ -19,6 +19,12 @@ public static class OrderExtensions
         if (string.IsNullOrWhiteSpace(clOrdId))
             throw new ArgumentException("ClOrdId cannot be empty.", nameof(clOrdId));
         
+        if (orderModel.Quantity.GetValueOrDefault() == 0)
+            throw new ArgumentException("Quantity must be greater than zero.", nameof(orderModel.Quantity));
+        
+        if (orderModel.Price.GetValueOrDefault() == 0)
+            throw new ArgumentException("Price must be greater than zero.", nameof(orderModel.Price));
+        
         var side = GetOrderSide(orderModel.Side);
         var order = new Order
         {

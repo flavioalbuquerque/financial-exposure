@@ -6,21 +6,32 @@ namespace OrderGenerator.Services;
 
 public class OrderService : IOrderService
 {
+    private readonly ILogger<OrderService> _logger;
     private readonly IFixSender _fixSender;
 
-    public OrderService(IFixSender fixSender)
+    public OrderService(ILogger<OrderService> logger,
+                        IFixSender fixSender)
     {
+        _logger = logger;
         _fixSender = fixSender;
     }
     
     public Task<string> SendOrder(OrderModel orderModel)
     {
-        var clOrdId = Guid.NewGuid().ToString();
-        var order = orderModel.ToOrderFix(clOrdId);
+        try
+        {
+            var clOrdId = Guid.NewGuid().ToString();
+            var order = orderModel.ToOrderFix(clOrdId);
 
-        var sent = _fixSender.SendNewOrderSingle(order);
-        var message = sent ? "Aguardando retorno..." : "Erro no envio";
-        return Task.FromResult(message);
+            var sent = _fixSender.SendNewOrderSingle(order);
+            var message = sent ? "Aguardando retorno..." : "Erro no envio";
+            return Task.FromResult(message);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error sending order: {ex.Message}", ex);
+            return Task.FromResult("Erro ao enviar ordem. Tente novamente.");
+        }
     }
     
     public IEnumerable<string> GetSymbols()
