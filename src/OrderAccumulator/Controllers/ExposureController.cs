@@ -64,7 +64,7 @@ public class ExposureController : ControllerBase
     /// </summary>
     /// <returns>Valor da exposição financeira máxima padrão.</returns>
     [HttpGet("default-max-exposure", Name = "GetDefaultMaxExposure")]
-    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)] 
+    [ProducesResponseType(typeof(decimal), StatusCodes.Status200OK)] 
     [ProducesResponseType(typeof(ProblemDetails),StatusCodes.Status500InternalServerError)] 
     public IActionResult GetDefaultMaxExposure()
     {
