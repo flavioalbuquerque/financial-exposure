@@ -23,7 +23,7 @@ Certifique-se de que as seguintes dependências estejam instaladas em sua máqui
 
 2. Restaure as dependências do projeto:
 ```
-dotnet restore
+dotnet restore src/FinancialExposure.sln
 ```
 
 3. Execute o `OrderAppHost` para iniciar os serviços:
