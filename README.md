@@ -31,7 +31,7 @@ dotnet restore src/FinancialExposure.sln
 dotnet run --project src/OrderAppHost
 ```
 
-## Como usar o Aspire no OrderAppHost
+## Como iniciar o orquestrador da solução
 O `OrderAppHost` utiliza o Aspire para gerenciar os serviços desta solução. Aqui estão os passos para usar o Aspire:
 
 1. Certifique-se de que o `OrderAppHost` está em execução:
@@ -49,11 +49,27 @@ http://localhost:15219
 - **Monitorar logs**: Visualizar logs em tempo real;
 - **Testar endpoints**: Usar ferramentas integradas para testar os endpoints da API.
 
+## Testando a interface para envio de ordens
+A interface `ÒrderGenerator` estará disponível no seguinte endereço:
+```
+https://localhost:7183
+```
+
+
 ## Testando a API
 A API do `OrderAccumulator` expõe documentação interativa através de:
-- **Swagger**: `http://localhost:5219/swagger`
-- **Scalar**: `http://localhost:5219/scalar`
-- **ReDoc**: `http://localhost:5219/redoc`
+- **Swagger**: 
+  ```
+  http://localhost:5219/swagger
+  ```
+- **Scalar**:
+  ```
+  http://localhost:5219/scalar
+  ````
+- **ReDoc**:
+  ```
+  http://localhost:5219/redoc
+  ```
 
 ## Regras do serviço
 
