@@ -45,15 +45,15 @@ http://localhost:15219
 ```
 
 3. No painel do Aspire, você pode:
-- Gerenciar serviços: Iniciar, parar ou reiniciar os serviços da solução;
-- Monitorar logs: Visualizar logs em tempo real para depuração;
-- Testar endpoints: Usar ferramentas integradas para testar os endpoints da API.
+- **Gerenciar serviços**: Iniciar, parar ou reiniciar os serviços da solução;
+- **Monitorar logs**: Visualizar logs em tempo real;
+- **Testar endpoints**: Usar ferramentas integradas para testar os endpoints da API.
 
 ## Como usar Swagger, Scalar e ReDoc
 Swagger, Scalar e ReDoc estão configurados para o projeto `ÒrderAccumulator` nos seguintes endereços:
-- Swagger: http://localhost:5219/swagger
-- Scalar: http://localhost:5219/scalar
-- ReDoc: http://localhost:5219/redoc
+- **Swagger**: `http://localhost:5219/swagger`
+- **Scalar**: `http://localhost:5219/scalar`
+- **ReDoc**: `http://localhost:5219/redoc`
 
 ## Diagramas
 Abaixo está o diagrama de sequência que ilustra o fluxo de envio de ordens:
