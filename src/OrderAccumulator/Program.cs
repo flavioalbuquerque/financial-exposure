@@ -99,7 +99,9 @@ public class Program
 
             app.UseReDoc(options =>
             {
-                options.SpecUrl("/openapi/v1.json");
+                options.RoutePrefix = "redoc";
+                options.SpecUrl = "/openapi/v1.json";
+                options.DocumentTitle = "API - OrderAccumulator";
             });
             
             app.MapScalarApiReference();
