@@ -67,10 +67,19 @@ public class Program
         {
             app.MapOpenApi();
 
+            app.MapGet("/openapi/v1.json", async context =>
+            {
+                var client = new HttpClient();
+                var swaggerJson = await client.GetStringAsync("http://localhost:5219/swagger/v1/swagger.json");
+
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(swaggerJson);
+            });
+            
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/openapi/v1.json", "OrderAccumulator V1");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "OrderAccumulator V1");
             });
 
             app.UseReDoc(options =>
