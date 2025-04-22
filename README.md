@@ -50,7 +50,7 @@ http://localhost:15219
 - **Testar endpoints**: Usar ferramentas integradas para testar os endpoints da API.
 
 ## Testando a interface para envio de ordens
-A interface `ÒrderGenerator` estará disponível no seguinte endereço:
+A interface `OrderGenerator` estará disponível no seguinte endereço:
 ```
 https://localhost:7183
 ```
