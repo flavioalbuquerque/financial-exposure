@@ -49,13 +49,21 @@ http://localhost:15219
 - **Monitorar logs**: Visualizar logs em tempo real;
 - **Testar endpoints**: Usar ferramentas integradas para testar os endpoints da API.
 
-## Como usar Swagger, Scalar e ReDoc
-Swagger, Scalar e ReDoc estão configurados para o projeto `ÒrderAccumulator` nos seguintes endereços:
+## Testando a API
+A API do `OrderAccumulator` expõe documentação interativa através de:
 - **Swagger**: `http://localhost:5219/swagger`
 - **Scalar**: `http://localhost:5219/scalar`
 - **ReDoc**: `http://localhost:5219/redoc`
 
-## Diagramas
+## Regras do serviço
+
+### Regras
+Ao receber uma nova ordem:
+- O `OrderAccumulator` calcula a exposição financeira total;
+- Se o envio ultrapassar o limite configurado, a ordem é rejeitada;
+- Caso contrário, a ordem é aceita e armazenada para futuros cálculos.
+
+### Diagramas
 Abaixo está o diagrama de sequência que ilustra o fluxo de envio de ordens:
 
 ```mermaid
@@ -72,12 +80,38 @@ sequenceDiagram
 
     Accumulator->>Accumulator: Calcula exposição financeira do ativo <BR/>considerando a Ordem enviada
     
-    alt Ordem ultrapassa o limite interno
+    alt Ordem ultrapassa o limite de exposição
         Accumulator->>Generator: FIX: ExecType = Rejected
         Generator->> Cliente: Ordem rejeitada
-    else Ordem dentro do limite
+    else Ordem dentro do limite de exposição
         Accumulator->>Accumulator: Armazena Ordem para utilizar <BR/>nos próximos cálculos <BR/>de exposição financeira
         Accumulator->>Generator: FIX: ExecType = New
         Generator->>Cliente: Ordem aceita
     end
 ```
+
+## Melhorias Futuras
+Funcionalidades planejadas para as próximas versões da solução:
+
+- [ ] **Correção na validação de ordens no frontend**  
+  Corrigir validação para quantidade e preço acima de 999,00.
+
+- [ ] **Dashboard de exposição agregada**  
+  Interface visual para acompanhar a exposição financeira total em tempo real.
+
+- [ ] **Dashboard de ordens**  
+  Interface visual para acompanhar as ordens por símbolo.
+
+- [ ] **Persistência em banco de dados**  
+  Armazenar ordens em um banco relacional para análise posterior.
+
+- [ ] **Testes automatizados**  
+  Inclusão de testes unitários e de integração para garantir a estabilidade do sistema.
+
+- [ ] **Integração com mensageria**  
+  Substituir chamadas diretas por mensagens assíncronas, aumentando a escalabilidade.
+  Esta melhoria também consiste em isolar o serviço `OrderGenerator` para que seja capaz de receber requisições de diferentes clients.
+
+- [ ] **Suporte a múltiplos ativos e múltiplos clientes**  
+  Separar cálculos de exposição por cliente e por ativo para maior granularidade.
+
