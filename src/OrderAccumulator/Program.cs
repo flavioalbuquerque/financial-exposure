@@ -107,7 +107,6 @@ public class Program
             app.MapScalarApiReference();
         }
 
-        app.UseHttpsRedirection();
         app.UseAuthorization();
         
         app.MapControllers();
