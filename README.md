@@ -140,7 +140,8 @@ sequenceDiagram
 Funcionalidades planejadas para as próximas versões da solução:
 
 - [ ] **Testes automatizados**  
-  Inclusão de testes unitários e de integração para garantir a estabilidade do sistema.
+  Inclusão de testes unitários para todas as classes de serviço e testes de integração para garantir a estabilidade do sistema.
+  Observação: Priorizei os testes unitários do serviço `OrderAccumulator.ExposureService`
 
 - [ ] **Implementar suporte completo a HTTPS**  
   Configurar os serviços para utilizar HTTPS por padrão, garantindo comunicação segura entre os componentes da solução.
