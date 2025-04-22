@@ -1,6 +1,13 @@
 # financial-exposure
 
-Este repositório contém a solução `FinancialExposure`, composta por três projetos:
+## Sobre o Projeto
+
+**Financial Exposure** é uma solução para **cálculo e monitoramento de exposição financeira em tempo real**.  
+Seu objetivo é acompanhar limites de exposição por ativo com base em ordens enviadas, simulando parte do ambiente de um sistema de negociação.
+
+A aplicação recebe como **input** uma interface web (via Blazor) onde é possível **enviar ordens**. Essas ordens são processadas por um serviço que calcula a exposição financeira e determina, por exemplo, se o envio ultrapassa os limites internos configurados. As ordens de compra aumentam a exposição e as de venda diminuem a exposição.
+
+Este repositório contém a solução `FinancialExposure`, que consiste em composta por três projetos:
 
 - **`OrderGenerator`**: Serviço implementado em Blazor que contém a interface para envio de ordens.
 - **`OrderAccumulator`**: Serviço utilizado para calcular a exposição financeira das ordens enviadas + API para acompanhamento de exposição financeira. 
