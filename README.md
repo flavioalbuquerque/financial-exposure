@@ -22,27 +22,27 @@ Certifique-se de que as seguintes dependências estejam instaladas em sua máqui
    cd financial-exposure
 
 2. Restaure as dependências do projeto:
-```
-dotnet restore src/FinancialExposure.sln
-```
+   ```
+   dotnet restore src/FinancialExposure.sln
+   ```
 
 3. Execute o `OrderAppHost` para iniciar os serviços:
-```
-dotnet run --project src/OrderAppHost
-```
+   ```
+   dotnet run --project src/OrderAppHost
+   ```
 
 ## Como iniciar o orquestrador da solução
 O `OrderAppHost` utiliza o Aspire para gerenciar os serviços desta solução. Aqui estão os passos para usar o Aspire:
 
 1. Certifique-se de que o `OrderAppHost` está em execução:
-```
-dotnet run --project src/OrderAppHost
-```
+   ```
+   dotnet run --project src/OrderAppHost
+   ```
 
 2. Acesse o painel do Aspire no navegador. Por padrão, ele estará disponível no seguinte endereço:
-```
-http://localhost:15219
-```
+   ```
+   http://localhost:15219
+   ```
 
 3. No painel do Aspire, você pode:
 - **Gerenciar serviços**: Iniciar, parar ou reiniciar os serviços da solução;
