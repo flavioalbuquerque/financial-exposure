@@ -22,8 +22,11 @@ public class ExposureService : IExposureService
     
     public bool CalculateExposureAddOrderIfWithinExposureLimit(Order order)
     {
-        if (string.IsNullOrWhiteSpace(order.Symbol) || order.Quantity <= 0)
-            return false;
+        if (string.IsNullOrWhiteSpace(order.Symbol))
+            throw new BusinessValidationException("Symbol cannot be empty.", nameof(order.Symbol));
+        
+        if (order.Quantity <= 0)
+            throw new BusinessValidationException("Quantity must be greater than zero.", nameof(order.Quantity));
 
         var currentExposure = GetExposure(order.Symbol);
 
