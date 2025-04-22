@@ -21,8 +21,11 @@ public class ExposureController : ControllerBase
     }
 
     /// <summary>
-    /// Obtém a exposição financeira para o símbolo especificado.
+    /// Consultar exposição financeira do símbolo
     /// </summary>
+    /// <remarks>
+    /// Obtém a exposição financeira para o símbolo especificado.
+    /// </remarks>
     /// <param name="symbol">Símbolo (exemplo: PETR4, VALE3, VIIA4).</param>
     /// <returns>Exposição financeira para o símbolo.</returns>
     [HttpGet("symbol/{symbol}", Name = "GetExposure")]
@@ -41,8 +44,11 @@ public class ExposureController : ControllerBase
     }
     
     /// <summary>
-    /// Obtém a exposição financeira para todos os símbolos.
+    /// Consultar exposição financeira de todos os símbolos
     /// </summary>
+    /// <remarks>
+    /// Obtém a exposição financeira para todos os símbolos.
+    /// </remarks>
     /// <returns>Exposição financeira de todos os símbolos.</returns>
     [HttpGet("symbol/all", Name = "GetAllExposures")]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)] 
@@ -54,7 +60,7 @@ public class ExposureController : ControllerBase
     }
     
     /// <summary>
-    /// Obtém a exposição financeira máxima padrão.
+    /// Consultar exposição financeira máxima padrão
     /// </summary>
     /// <returns>Valor da exposição financeira máxima padrão.</returns>
     [HttpGet("default-max-exposure", Name = "GetDefaultMaxExposure")]
@@ -67,7 +73,7 @@ public class ExposureController : ControllerBase
     }
     
     /// <summary>
-    /// Define a exposição financeira máxima padrão.
+    /// Alterar exposição financeira máxima padrão
     /// </summary>
     /// <param name="defaultMaxExposure">Valor da exposição financeira máxima padrão</param>
     /// <returns>Sucesso ou falha.</returns>

@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.OpenApi.Models;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 using OrderAccumulator.Middlewares;
@@ -8,6 +9,7 @@ using OrderAccumulator.Services.Interfaces;
 using OrderAccumulator.Settings;
 using QuickFix;
 using Scalar.AspNetCore;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace OrderAccumulator;
 
@@ -53,6 +55,12 @@ public class Program
 
         builder.Services.AddSwaggerGen(options =>
         {
+            options.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Order Accumulator API",
+                Version = "v1",
+                Description = "API para consultar e gerenciar ordens limite de exposição financeira."
+            });
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             options.IncludeXmlComments(xmlPath);
@@ -67,13 +75,20 @@ public class Program
         {
             app.MapOpenApi();
 
-            app.MapGet("/openapi/v1.json", async context =>
+            app.Map("/openapi/v1.json", async context =>
             {
-                var client = new HttpClient();
-                var swaggerJson = await client.GetStringAsync("http://localhost:5219/swagger/v1/swagger.json");
+                var swaggerProvider = app.Services.GetRequiredService<ISwaggerProvider>();
+                var swaggerDoc = swaggerProvider.GetSwagger("v1");
 
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(swaggerJson);
+
+                await using var writer = new StringWriter();
+                var openApiWriter = new Microsoft.OpenApi.Writers.OpenApiJsonWriter(writer);
+                swaggerDoc.SerializeAsV3(openApiWriter);
+                openApiWriter.Flush();
+
+                var json = writer.ToString();
+                await context.Response.WriteAsync(json);
             });
             
             app.UseSwagger();
