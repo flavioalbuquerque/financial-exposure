@@ -1,5 +1,6 @@
 ﻿using OrderAccumulator.Extensions;
 using OrderAccumulator.Models;
+using OrderAccumulator.Services.Interfaces;
 using QuickFix;
 
 namespace OrderAccumulator.Services
@@ -7,13 +8,13 @@ namespace OrderAccumulator.Services
     public class FixApplication : MessageCracker, IApplication
     {
         private readonly ILogger<FixApplication> _logger;
-        private readonly ExposureCalculatorService _exposureCalculatorService;
+        private readonly IExposureService _exposureService;
         
         public FixApplication(ILogger<FixApplication> logger,
-                              ExposureCalculatorService exposureCalculatorService)
+                              IExposureService exposureService)
         {
             _logger = logger;
-            _exposureCalculatorService = exposureCalculatorService;
+            _exposureService = exposureService;
         }
 
         private string? GenOrderId(bool orderCreated)
@@ -72,7 +73,7 @@ namespace OrderAccumulator.Services
         {
             var order = n.ToOrder("OrderGenerator");
 
-            var added = _exposureCalculatorService.CalculateExposureAddOrderIfWithinExposureLimit(order);
+            var added = _exposureService.CalculateExposureAddOrderIfWithinExposureLimit(order);
             
             order.OrderId = GenOrderId(added);
             order.ExecId = GenExecId();
