@@ -116,6 +116,9 @@ Funcionalidades planejadas para as próximas versões da solução:
   Configurar os serviços para utilizar HTTPS por padrão, garantindo comunicação segura entre os componentes da solução.
   Inclui ajustes nas configurações de `applicationUrl` e a remoção da dependência da variável `ASPIRE_ALLOW_UNSECURED_TRANSPORT` para ambientes locais.
 
+- [ ] **API OrderAccumulator: Desacoplar model do retorno da API**  
+  Separar o modelo de domínio utilizado internamente (ex: entidade `Order`) dos modelos de resposta (DTOs) expostos pela API.
+
 - [ ] **Dashboard de exposição agregada**  
   Interface visual para acompanhar a exposição financeira total em tempo real.
 
