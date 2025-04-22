@@ -5,7 +5,14 @@ public class Order
     public string? OrderId { get; set; }
     public string? ExecId { get; set; }
     public required string ClOrdId { get; init; }
-    public required string Symbol { get; init; } 
+    
+    private readonly string _symbol = null!;
+    public required string Symbol
+    {
+        get => _symbol;
+        init => _symbol = value.ToUpperInvariant();
+    }
+
     public OrderSide Side { get; init; }
     public decimal Quantity { get; init; }
     public decimal Price { get; init; }
